@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="piyush.almanac.cs3yr_faculty.AboutDeveloper">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView7" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/luxury"
+            android:focusableInTouchMode="false"
+            android:nestedScrollingEnabled="false">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Developed By :"
+                android:id="@+id/textView32"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textColor="#fbf4ff"
+                android:textSize="19dp"
+                android:textAlignment="center" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView4"
+                android:src="@drawable/almanac"
+                android:layout_below="@+id/textView32"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ALMANC TEAM "
+                android:id="@+id/textView27"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/imageView4"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text=" Developed by :"
+                android:id="@+id/textView33"
+                android:layout_below="@+id/textView27"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="5dp"
+                android:textColor="#f3e3ff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Piyush Talele"
+                android:id="@+id/textView34"
+                android:layout_below="@+id/textView33"
+                android:layout_alignLeft="@+id/textView33"
+                android:layout_alignStart="@+id/textView33"
+                android:layout_marginTop="4dp"
+                android:layout_marginLeft="14dp"
+                android:textColor="#f9f2ff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Mayank Agarwal"
+                android:id="@+id/textView35"
+                android:layout_below="@+id/textView34"
+                android:layout_alignLeft="@+id/textView34"
+                android:layout_alignStart="@+id/textView34"
+                android:layout_marginTop="4dp"
+                android:textColor="#f5ebff" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="_________________________________________"
+                android:id="@+id/textView38"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="10dp"
+                android:layout_alignParentRight="true"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_below="@+id/textView35" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="\u00a9 Copyright ALMANAC 2016."
+                android:id="@+id/textView41"
+                android:textColor="#ffcccc"
+                android:layout_below="@+id/textView38"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+
+
+
+
+</RelativeLayout>

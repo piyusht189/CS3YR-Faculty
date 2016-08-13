@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,42 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.File;
-
-public class MainActivity extends AppCompatActivity
+public class MyProfile extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPageAdapter2 adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Today","Time-Table"};
-    int Numboftabs =2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_myprofile);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        adapter =  new ViewPageAdapter2(getSupportFragmentManager(),Titles,Numboftabs);
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
 
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
-
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
-            @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
-            }
-        });
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -73,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.myprofile, menu);
         return true;
     }
 
@@ -84,7 +57,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.feed) {
             startActivity(new Intent(this,Feedback.class));
@@ -97,10 +69,8 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            File dir = getFilesDir();
-            File file = new File(dir, "email.txt");
-            file.delete();
-            startActivity(new Intent(MainActivity.this,Login.class));
+            Logout logout = new Logout();
+            logout.onLogout();
             finish();
 
             return true;
@@ -115,7 +85,6 @@ public class MainActivity extends AppCompatActivity
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

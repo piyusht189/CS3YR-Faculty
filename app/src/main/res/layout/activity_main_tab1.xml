@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="piyush.almanac.cs3yr_faculty.main_tab1"
+    android:background="#ddd">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView10" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Today&apos;s Schedule !"
+                android:id="@+id/textView26"
+                android:layout_alignParentTop="false"
+                android:layout_centerHorizontal="true"
+                android:textSize="25dp"
+                android:textColor="#472778"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="day"
+                android:id="@+id/day"
+                android:layout_below="@+id/textView26"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:textSize="23dp"
+                android:textColor="#2b8035" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ttimage"
+                android:src="@drawable/monday"
+                android:focusableInTouchMode="false"
+                android:elevation="90dp"
+                android:focusable="false"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/date" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="date"
+                android:id="@+id/date"
+                android:layout_below="@+id/day"
+                android:layout_centerHorizontal="true"
+                android:textSize="20dp"
+                android:layout_marginTop="3dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="Swipe Left For Full TimeTable"
+                android:id="@+id/textView28"
+                android:layout_alignTop="@+id/imageView6"
+                android:layout_toEndOf="@+id/imageView6"
+                android:layout_alignBottom="@+id/imageView6"
+                android:lines="3"
+                android:linksClickable="true"
+                android:layout_toRightOf="@+id/imageView6"
+                android:textSize="20dp"
+                android:textColor="#145e21"
+                android:paddingLeft="10dp" />
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imageView6"
+                android:src="@drawable/swipe"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/ttimage"
+                android:layout_marginTop="15dp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
+
+
+
+

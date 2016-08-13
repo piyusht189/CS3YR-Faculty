@@ -12,27 +12,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.File;
-
-public class MainActivity extends AppCompatActivity
+public class Notices extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPageAdapter2 adapter;
+    CharSequence Titles[] = {"All Faculty","Send Notice","Public Notice"};
+    ViewPager viewPager;
+    ViewPagerAdapterNotice adapter;
     SlidingTabLayout tabs;
-    CharSequence Titles[]={"Today","Time-Table"};
-    int Numboftabs =2;
-
+    int TotalNumberTabs = 3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_notices);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        adapter =  new ViewPageAdapter2(getSupportFragmentManager(),Titles,Numboftabs);
+
+        adapter =  new ViewPagerAdapterNotice(getSupportFragmentManager(),Titles,TotalNumberTabs);
+
         // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager.setAdapter(adapter);
 
         // Assiging the Sliding Tab Layout View
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
@@ -47,7 +45,7 @@ public class MainActivity extends AppCompatActivity
         });
 
         // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
+        tabs.setViewPager(viewPager);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.notices, menu);
         return true;
     }
 
@@ -83,8 +81,6 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.feed) {
             startActivity(new Intent(this,Feedback.class));
@@ -97,10 +93,8 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            File dir = getFilesDir();
-            File file = new File(dir, "email.txt");
-            file.delete();
-            startActivity(new Intent(MainActivity.this,Login.class));
+            Logout logout = new Logout();
+            logout.onLogout();
             finish();
 
             return true;
@@ -115,7 +109,6 @@ public class MainActivity extends AppCompatActivity
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -136,7 +129,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.today) {
             startActivity(new Intent(this,MainActivity.class));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Name"
+        android:id="@+id/textViewfacName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textSize="23dp"
+        android:textColor="#672b77" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Email"
+        android:id="@+id/textViewfacEmail"
+        android:layout_toRightOf="@+id/textView12"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#9f3636"
+        android:autoLink="email"
+        android:textSize="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Phone"
+        android:id="@+id/textViewfacPhone"
+        android:layout_below="@+id/textViewfacName"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#43918e"
+        android:autoLink="phone"
+        android:textSize="18dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="---"
+        android:id="@+id/textView12"
+        android:layout_alignTop="@+id/textViewfacEmail"
+        android:layout_toRightOf="@+id/textViewfacName"
+        android:layout_toEndOf="@+id/textViewfacName"
+        android:singleLine="false"
+        android:textSize="25dp"
+        android:textColor="#000000"
+        android:layout_marginLeft="15dp" />
+</RelativeLayout>
+
+</LinearLayout>

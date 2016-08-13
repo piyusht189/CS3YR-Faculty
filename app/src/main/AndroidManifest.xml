@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="piyush.almanac.cs3yr_faculty">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission-sdk-23 android:name="android.permission.INTERNET" />
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,12 +18,43 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
+        <activity
+            android:name=".Notices"
+            android:label="@string/title_activity_notices"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MyProfile"
+            android:label="@string/title_activity_myprofile"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Students"
+            android:label="@string/title_activity_students"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Faculties"
+            android:label="@string/title_activity_faculties"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".LoadContent" />
+        <activity android:name=".VerificationCode"
+           />
+        <activity android:name=".Feedback"
+           />
+        <activity android:name=".AboutDeveloper"
+            />
+        <activity android:name=".UpcomingFeatures"
+           />
+        <activity android:name=".Query"
+            />
+        <activity android:name=".Register"
+            />
+
     </application>
 
 </manifest>

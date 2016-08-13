@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+        <item
+            android:id="@+id/today"
+
+            android:title="Today" />
+        <item
+            android:id="@+id/notices"
+
+            android:title="Notices"/>
+        <item
+            android:id="@+id/students"
+
+            android:title="Students" />
+        <item
+            android:id="@+id/faculties"
+
+            android:title="Faculties" />
+       <item
+            android:id="@+id/myprofile"
+           android:title="My Profile"/>
+
+
+
+</menu>

@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="piyush.almanac.cs3yr_faculty.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="piyush.almanac.cs3yr_faculty.Notices"
+    tools:showIn="@layout/app_bar_notices">
 
 </RelativeLayout>

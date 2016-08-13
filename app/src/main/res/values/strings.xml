@@ -5,4 +5,90 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_notices">Notices</string>
+    <string name="title_activity_myprofile">myprofile</string>
+    <string name="title_activity_students">students</string>
+    <string name="title_activity_faculties">Faculties</string>
+
+    <!--Register.java-->
+    <string name="register_Successresponse">Success</string>
+    <string name="register_Alreadyresponse">Already</string>
+    <string name="register_registeredtext">You are already registered.</string>
+    <string name="register_Failedresponse">Failed</string>
+    <string name="register_failedtext">Internet slow. Try again</string>
+
+    <!--activity_register.xml-->
+    <string name="register_name_hint">Enter Your Name</string>
+    <string name="register_email_hint">Enter your kiit official email</string>
+    <string name="register_pass1_hint">Enter New Password</string>
+    <string name="register_pass2_hint">Re-Enter Password</string>
+    <string name="register_designation_hint">Designation</string>
+    <string name="register_phone_hint">Enter Your Phone Number</string>
+    <string name="register_button">Register</string>
+    <string name="register_description">Your Short Summary</string>
+
+
+    <!--Login.java-->
+    <string name="login_Successresponse">Success</string>
+    <string name="login_Pendingresponse">Pending</string>
+    <string name="login_pendingtext">Registration still Pending.Please complete</string>
+    <string name="login_NotRegisteredresponse">Not Registered</string>
+    <string name="login_notregisteredtext">Registration not done.Please register</string>
+    <string name="login_Failedresponse">Failed</string>
+    <string name="login_failedtext">Internet slow. Try again</string>
+
+
+    <!--activity_login.xml-->
+    <string name="login_email">Enter Email(Example: 14XXXXX@kiit.ac.in)</string>
+    <string name="login_password">Enter Password</string>
+    <string name="login_button">Login</string>
+    <string name="logintosignuptext">Dont Have an account? Sign Up</string>
+
+    <!--VerificationCode.java-->
+    <string name="verifycode_Successresponse">Success</string>
+    <string name="verifycode_Failedresponse">Failed</string>
+    <string name="verifycode_failedtext">Wrong Code. Please Try Again</string>
+
+    <!--activity_verification_code.xml-->
+    <string name="verificationtext_hint">Enter the Verification Code</string>
+    <string name="verify_button">Verify</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!--LoadContent.java-->
+    <string name="load_url">http://kgbvbundu.org/cs2014/getfulldata.php</string>
+    <string name="Internet_Not_Connected">Internet is required to download the content</string>
+
+    <!--Extras-->
+    <string name="First_Menu">Feedback</string>
+    <string name="Second_Menu">About Developers</string>
+    <string name="Third_Menu">Log Out</string>
+    <string name="Fourth_Menu">Upcoming Features</string>
+    <string name="Fifth_Menu">Query</string>
+
+    <!--Internet-Connection-->
+    <string name="internet_not_connect">Internet not connected. Plz try again after connecting</string>
+    <!--Notice_tab1.java-->
+    <string name="allfaculty_notice_url">https://cs3yr-stud.firebaseio.com/AllFaculties/</string>
+
+    <!--notice_tab1.xml-->
+    <string name="send_button_text_batch">Send</string>
+
+    <!--Notice_tab2.java-->
+    <string name="recent_notice_url">https://cs3yr-stud.firebaseio.com/Teacher/</string>
+
+    <!--notice_tab2.xml-->
+    <string name="send_button_text_teach">Send</string>
+
+    <!--Notice_tab3.java-->
+    <string name="public_notice_url">https://cs3yr-stud.firebaseio.com/Public/</string>
+
+    <!--notice_tab3.xml-->
+    <string name="send_button_text_public">Send</string>
+
+    <!--Students.java-->
+    <string name="Student_url">https://cs3yr-stud.firebaseio.com/Stud_Regis/</string>
+
+    <!--Faculties.java-->
+     <string name="fetch_url">http://kgbvbundu.org/cs2014/fetchteachers.php</string>
+
 </resources>

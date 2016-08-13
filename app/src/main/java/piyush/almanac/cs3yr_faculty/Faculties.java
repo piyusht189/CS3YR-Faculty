@@ -1,54 +1,94 @@
 package piyush.almanac.cs3yr_faculty;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-import java.io.File;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
-public class MainActivity extends AppCompatActivity
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Faculties extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Toolbar toolbar;
-    ViewPager pager;
-    ViewPageAdapter2 adapter;
-    SlidingTabLayout tabs;
-    CharSequence Titles[]={"Today","Time-Table"};
-    int Numboftabs =2;
-
+String fetch_url=getResources().getString(R.string.fetch_url);
+    RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_faculties);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        adapter =  new ViewPageAdapter2(getSupportFragmentManager(),Titles,Numboftabs);
-        // Assigning ViewPager View and setting the adapter
-        pager = (ViewPager) findViewById(R.id.pager);
-        pager.setAdapter(adapter);
+        requestQueue = Volley.newRequestQueue(Faculties.this);
+        final ProgressDialog pDialog = ProgressDialog.show(this,"Fetching...","Please wait...",false,false);
 
-        // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
-        tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
+        JSONObject params = new JSONObject();
+        try {
+            params.put("email", loadData());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        // Setting Custom Color for the Scroll bar indicator of the Tab View
-        tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, fetch_url,params, new Response.Listener<JSONObject>() {
+            @SuppressLint("SetTextI18n")
             @Override
-            public int getIndicatorColor(int position) {
-                return getResources().getColor(R.color.tabsScrollColor);
+            public void onResponse(JSONObject response) {
+                pDialog.dismiss();
+                try
+                {
+                    JSONArray detail=response.getJSONArray("teachers");
+                    for(int i=0;i<detail.length();i++) {
+                        JSONObject singledetail = detail.getJSONObject(i);
+
+
+
+
+                    }
+                }
+                catch (JSONException e)
+                {
+                    Toast.makeText(Faculties.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
             }
-        });
-
-        // Setting the ViewPager For the SlidingTabsLayout
-        tabs.setViewPager(pager);
-
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.dismiss();
+                Toast.makeText(Faculties.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+        requestQueue.add(jsonObjectRequest);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -70,10 +110,29 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    protected String loadData() {
+        String FILENAME = "email.txt";
+        String out = "";
+
+        try {
+            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
+            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
+            String sLine1;
+            while (((sLine1 = br1.readLine()) != null)) {
+                out += sLine1;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return out;
+    }
+
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.faculties, menu);
         return true;
     }
 
@@ -84,7 +143,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         //noinspection SimplifiableIfStatement
         if (id == R.id.feed) {
             startActivity(new Intent(this,Feedback.class));
@@ -97,10 +155,8 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            File dir = getFilesDir();
-            File file = new File(dir, "email.txt");
-            file.delete();
-            startActivity(new Intent(MainActivity.this,Login.class));
+            Logout logout = new Logout();
+            logout.onLogout();
             finish();
 
             return true;
@@ -115,7 +171,6 @@ public class MainActivity extends AppCompatActivity
             finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -136,7 +191,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.today) {
             startActivity(new Intent(this,MainActivity.class));
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
