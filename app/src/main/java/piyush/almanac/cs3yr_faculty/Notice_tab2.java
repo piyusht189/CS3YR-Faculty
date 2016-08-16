@@ -48,6 +48,7 @@ public class Notice_tab2 extends Fragment {
 
         try {
             JSONArray te = Data.getSections(getActivity());
+            arr = new String[te.length()];
             for (int i = 0; i < te.length(); i++) {
                 JSONObject d = te.getJSONObject(i);
                 arr[i] = d.getString("section");

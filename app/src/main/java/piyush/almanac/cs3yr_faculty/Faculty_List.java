@@ -32,7 +32,7 @@ public class Faculty_List extends ArrayAdapter<String> {
 
         textViewName = (TextView)view.findViewById(R.id.textViewTeachName);
         textViewEmail = (TextView)view.findViewById(R.id.textViewTeachEmail);
-        textViewPhone = (TextView)view.findViewById(R.id.phone);
+        textViewPhone = (TextView)view.findViewById(R.id.textViewPhone);
 
 
         textViewName.setText(name[position]);

@@ -32,19 +32,22 @@ public class Faculties extends AppCompatActivity
         listView = (ListView)findViewById(R.id.faculties_list_view);
        try {
            JSONArray te = Data.getTeacherEmail(Faculties.this);
+           temail = new String[te.length()];
            for (int i = 0; i < te.length(); i++) {
-               JSONObject d = te.getJSONObject(i);
-               temail[i]=d.getString("temail");
+               JSONObject d1 = te.getJSONObject(i);
+               temail[i]=d1.getString("temail");
            }
            JSONArray tn = Data.getTeacherName(Faculties.this);
-           for (int i = 0; i < te.length(); i++) {
-               JSONObject d = tn.getJSONObject(i);
-               tname[i]=d.getString("tname");
+           tname = new String[tn.length()];
+           for (int i = 0; i < tn.length(); i++) {
+               JSONObject d2 = tn.getJSONObject(i);
+               tname[i]=d2.getString("tname");
            }
            JSONArray tp = Data.getTeacherPhone(Faculties.this);
-           for (int i = 0; i < te.length(); i++) {
-               JSONObject d = tp.getJSONObject(i);
-                 phone[i]=d.getString("phone");
+           phone = new String[tp.length()];
+           for (int i = 0; i < tp.length(); i++) {
+               JSONObject d3 = tp.getJSONObject(i);
+                 phone[i]=d3.getString("phone");
            }
 
            Faculty_List adapter = new Faculty_List(Faculties.this,tname,temail,phone);

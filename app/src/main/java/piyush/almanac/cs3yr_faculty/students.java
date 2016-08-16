@@ -44,6 +44,7 @@ public class Students extends AppCompatActivity
         setSupportActionBar(toolbar);
         try {
             JSONArray te = Data.getSections(Students.this);
+            arr = new String[te.length()];
             for (int i = 0; i < te.length(); i++) {
                 JSONObject d = te.getJSONObject(i);
                 arr[i] = d.getString("section");
