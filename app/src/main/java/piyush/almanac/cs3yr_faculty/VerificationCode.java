@@ -44,6 +44,7 @@ public class VerificationCode extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verification_code);
 
+
         ButterKnife.bind(VerificationCode.this);
         requestQueue = Volley.newRequestQueue(VerificationCode.this);
     }
@@ -147,5 +148,7 @@ public class VerificationCode extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
 }
