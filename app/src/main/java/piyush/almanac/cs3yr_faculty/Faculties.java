@@ -1,7 +1,5 @@
 package piyush.almanac.cs3yr_faculty;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -12,83 +10,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.ListView;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Faculties extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-String fetch_url=getResources().getString(R.string.fetch_url);
-    RequestQueue requestQueue;
+
+    ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faculties);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        requestQueue = Volley.newRequestQueue(Faculties.this);
-        final ProgressDialog pDialog = ProgressDialog.show(this,"Fetching...","Please wait...",false,false);
 
-        JSONObject params = new JSONObject();
-        try {
-            params.put("email", loadData());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, fetch_url,params, new Response.Listener<JSONObject>() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onResponse(JSONObject response) {
-                pDialog.dismiss();
-                try
-                {
-                    JSONArray detail=response.getJSONArray("teachers");
-                    for(int i=0;i<detail.length();i++) {
-                        JSONObject singledetail = detail.getJSONObject(i);
+        listView = (ListView)findViewById(R.id.faculties_list_view);
 
 
 
-
-                    }
-                }
-                catch (JSONException e)
-                {
-                    Toast.makeText(Faculties.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                pDialog.dismiss();
-                Toast.makeText(Faculties.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json; charset=utf-8");
-                return headers;
-            }
-        };
-        requestQueue.add(jsonObjectRequest);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -183,7 +125,7 @@ String fetch_url=getResources().getString(R.string.fetch_url);
         if (id == R.id.notices) {
             startActivity(new Intent(this,Notices.class));
         } else if (id == R.id.myprofile) {
-            startActivity(new Intent(this,MyProfile.class));
+            startActivity(new Intent(this,myprofile.class));
         } else if (id == R.id.students) {
             startActivity(new Intent(this,Students.class));
         } else if (id == R.id.faculties) {

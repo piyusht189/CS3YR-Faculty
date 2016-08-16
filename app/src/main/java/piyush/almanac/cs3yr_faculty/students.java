@@ -193,7 +193,7 @@ public class Students extends AppCompatActivity
         if (id == R.id.notices) {
             startActivity(new Intent(this,Notices.class));
         } else if (id == R.id.myprofile) {
-            startActivity(new Intent(this,MyProfile.class));
+            startActivity(new Intent(this,myprofile.class));
         } else if (id == R.id.students) {
             startActivity(new Intent(this,Students.class));
         } else if (id == R.id.faculties) {

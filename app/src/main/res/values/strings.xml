@@ -91,4 +91,8 @@
     <!--Faculties.java-->
      <string name="fetch_url">http://kgbvbundu.org/cs2014/fetchteachers.php</string>
 
+    <!--ImagePicker.java-->
+    <string name="pick_image_intent_text">Image</string>
+
+
 </resources>
