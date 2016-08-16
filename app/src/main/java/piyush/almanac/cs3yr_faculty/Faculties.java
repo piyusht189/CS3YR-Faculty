@@ -12,14 +12,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-
 public class Faculties extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     ListView listView;
+    String tname[];
+    String temail[];
+    String phone[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +27,22 @@ public class Faculties extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listView = (ListView)findViewById(R.id.faculties_list_view);
+        for (int i=0;i<50;i++)
+        {
+            tname[i]=Data.getTeacherName(i,Faculties.this);
+        }
+        for (int i=0;i<50;i++)
+        {
+            temail[i]=Data.getTeacherEmail(i,Faculties.this);
+        }
+        for (int i=0;i<50;i++)
+        {
+            phone[i]=Data.getTeacherPhone(i,Faculties.this);
+        }
 
+
+        Faculty_List adapter = new Faculty_List(Faculties.this,tname,temail,phone);
+        listView.setAdapter(adapter);
 
 
 
@@ -50,23 +64,6 @@ public class Faculties extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    protected String loadData() {
-        String FILENAME = "email.txt";
-        String out = "";
-
-        try {
-            FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-            BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-            String sLine1;
-            while (((sLine1 = br1.readLine()) != null)) {
-                out += sLine1;
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return out;
     }
 
 

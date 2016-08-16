@@ -123,7 +123,7 @@ public class Register extends AppCompatActivity {
                                             params.put("designation", designation);
                                             params.put("phone", phone);
                                             params.put("summary", summ);
-                                          //  params.put("macid", getMacid());
+
 
                                             //returning parameters
                                             return params;
@@ -174,39 +174,10 @@ public class Register extends AppCompatActivity {
         }
     }
 
-    public String getMacid()
-    {
+    public String getMacid() {
         return UUID.randomUUID().toString();
-
-        /*try {
-            List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface nif : all) {
-                if (!nif.getName().equalsIgnoreCase("wlan0")) continue;
-
-                byte[] macBytes = nif.getHardwareAddress();
-                if (macBytes == null) {
-                    return "";
-                }
-
-                StringBuilder res1 = new StringBuilder();
-                for (byte b : macBytes) {
-                    res1.append(String.format("%02X:",b));
-                }
-
-                if (res1.length() > 0) {
-                    res1.deleteCharAt(res1.length() - 1);
-                }
-                return res1.toString();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wInfo = wifiManager.getConnectionInfo();
-        return wInfo.getMacAddress();
-        */
     }
+
 
     public boolean isNetworkAvailable() {
         ConnectivityManager cm = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);

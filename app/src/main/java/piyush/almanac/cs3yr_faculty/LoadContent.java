@@ -146,7 +146,7 @@ public class LoadContent extends AppCompatActivity {
     {
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(LoadContent.this));
-            JSONArray jsonArray = jsonObject.getJSONArray("timetable");
+            JSONArray jsonArray = jsonObject.getJSONArray("tt");
             JSONObject jsonObject1 = jsonArray.getJSONObject(0);
             new SaveImageAsync().execute(jsonObject1.getString("mon"),"Monday");
             new SaveImageAsync().execute(jsonObject1.getString("tue"),"Tuesday");
@@ -154,7 +154,7 @@ public class LoadContent extends AppCompatActivity {
             new SaveImageAsync().execute(jsonObject1.getString("thurs"),"Thursday");
             new SaveImageAsync().execute(jsonObject1.getString("fri"),"Friday");
             new SaveImageAsync().execute(jsonObject1.getString("sat"),"Saturday");
-            new SaveImageAsync().execute(jsonObject1.getString(""),"FullTT");
+            new SaveImageAsync().execute(jsonObject1.getString("main"),"FullTT");
             storeImageProfilePic();
         }
         catch (Exception e)
@@ -167,7 +167,7 @@ public class LoadContent extends AppCompatActivity {
     {
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(LoadContent.this));
-            JSONArray jsonArray = jsonObject.getJSONArray("studdetails");
+            JSONArray jsonArray = jsonObject.getJSONArray("teachdetails");
             JSONObject jsonObject1 = jsonArray.getJSONObject(0);
             new SaveImageAsync().execute(jsonObject1.getString("profilepic"),"ProfilePic");
         }

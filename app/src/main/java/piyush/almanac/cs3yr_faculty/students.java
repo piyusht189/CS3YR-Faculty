@@ -31,14 +31,18 @@ public class Students extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView listView;
     Spinner spinner;
-    String arr[]={"piyush","Mayank"};
+    String arr[];
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        for(int i=0;i<10;i++)
+        {
+            arr[i]=Data.getSections(getApplicationContext(),i);
+        }
         spinner = (Spinner) findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr);
@@ -48,12 +52,13 @@ public class Students extends AppCompatActivity
         spinner.setAdapter(adapter);
 
 
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String name= spinner.getSelectedItem().toString();
-                Toast.makeText(getApplicationContext(), "Selected ", Toast.LENGTH_SHORT).show();
-
+                name= spinner.getSelectedItem().toString();
+                Toast.makeText(getApplicationContext(), name+":Batch Students", Toast.LENGTH_SHORT).show();
+                StudentFetchDetail(name);
 
             }
 
@@ -78,7 +83,7 @@ public class Students extends AppCompatActivity
         listView = (ListView)findViewById(R.id.listViewStudents);
 
         if(isNetworkAvailable()) {
-            StudentFetchDetail();
+            StudentFetchDetail(name);
         }
         else {
             Toast.makeText(this, R.string.internet_not_connect, Toast.LENGTH_SHORT).show();
@@ -86,11 +91,11 @@ public class Students extends AppCompatActivity
 
 
     }
-    public void StudentFetchDetail()
+    public void StudentFetchDetail(String name1)
     {
         final ProgressDialog progressDialog = ProgressDialog.show(this,"Fetching...","Please wait",false,false);
 
-        String url = getResources().getString(R.string.Student_url)+Data.getSection();
+        String url = getResources().getString(R.string.Student_url)+name1;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
 
         ref.orderByChild("name").addValueEventListener(new ValueEventListener() {

@@ -81,7 +81,7 @@ public class Notice_tab3 extends Fragment {
     {
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"Fetching...","Please wait",false,false);
 
-        String url = getActivity().getResources().getString(R.string.public_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.public_notice_url);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
         ref.addValueEventListener(new ValueEventListener() {
             @Override
@@ -116,11 +116,11 @@ public class Notice_tab3 extends Fragment {
 
     public void onClickSendStudNotice()
     {
-        String url = getActivity().getResources().getString(R.string.public_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.public_notice_url);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
 
         Notice_Structure1 notice_structure1 = new Notice_Structure1();
-        notice_structure1.setName(getName());
+        notice_structure1.setName(Data.getName(getActivity()));
         notice_structure1.setMessage(editText.getText().toString());
         ref.push().setValue(notice_structure1);
         editText.setText("");
@@ -135,8 +135,5 @@ public class Notice_tab3 extends Fragment {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public String getName()
-    {
-        return "mayank";
-    }
+
 }

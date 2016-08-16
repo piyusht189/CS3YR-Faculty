@@ -54,7 +54,14 @@ public class myprofile extends AppCompatActivity
         phone = (TextView)findViewById(R.id.phone);
 
 
-        profilepic.setImageBitmap(Data.getSavedImage(My_Profile.this,"ProfilePic"));
+        profilepic.setImageBitmap(Data.getSavedImage(myprofile.this,"ProfilePic"));
+
+
+        name.setText(Data.getName(myprofile.this));
+        email.setText(Data.getEmail(myprofile.this));
+        description.setText(Data.getSummary(myprofile.this));
+        designation.setText(Data.getDesignation(myprofile.this));
+        phone.setText(Data.getPhone(myprofile.this));
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -130,7 +137,7 @@ public class myprofile extends AppCompatActivity
         if (id == R.id.notices) {
             startActivity(new Intent(this,Notices.class));
         } else if (id == R.id.myprofile) {
-            startActivity(new Intent(this,MyProfile.class));
+            startActivity(new Intent(this,myprofile.class));
         } else if (id == R.id.students) {
             startActivity(new Intent(this,Students.class));
         } else if (id == R.id.faculties) {
@@ -163,11 +170,11 @@ public class myprofile extends AppCompatActivity
     }
 
     private void uploadImage(final Bitmap bitmap){
-String em=
+
         if(bitmap!=null) {
             //Showing the progress dialog
             final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
-            String UPLOAD_URL;
+            String UPLOAD_URL="http://kgbvbundu.org/cs2014teach/profilepic/uploadprofilepic.php";
 
             StringRequest stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
                     new Response.Listener<String>() {
@@ -176,8 +183,8 @@ String em=
                             //Disimissing the progress dialog
                             loading.dismiss();
                             //Showing toast message of the response
-                            if(s.equalsIgnoreCase("success")) {
-                                Toast.makeText(My_Profile.this, "Pic Uploaded" , Toast.LENGTH_LONG).show();
+                            if(s.equalsIgnoreCase("Success")) {
+                                Toast.makeText(myprofile.this, "Pic Uploaded" , Toast.LENGTH_LONG).show();
                             }
                         }
                     }, new Response.ErrorListener() {
@@ -187,17 +194,17 @@ String em=
                     loading.dismiss();
 
                     //Showing toast
-                    Toast.makeText(My_Profile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(myprofile.this, volleyError.getMessage(), Toast.LENGTH_LONG).show();
 
                     String body;
                     //get response body and parse with appropriate encoding
                     if(volleyError.networkResponse.data!=null) {
                         try {
                             body = new String(volleyError.networkResponse.data,"UTF-8");
-                            Toast.makeText(My_Profile.this,body, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(myprofile.this,body, Toast.LENGTH_SHORT).show();
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
-                            Toast.makeText(My_Profile.this,e.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(myprofile.this,e.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -212,7 +219,7 @@ String em=
 
                     //Adding parameters
                     params.put("image", image);
-                    params.put("email", Data.getEmail(My_Profile.this));
+                    params.put("email", Data.getEmail(myprofile.this));
 
                     //returning parameters
                     return params;
@@ -226,7 +233,7 @@ String em=
             requestQueue.add(stringRequest);
         }
         else {
-            Toast.makeText(MyProfile.this,"Operation Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(myprofile.this,"Operation Canceled", Toast.LENGTH_SHORT).show();
         }
     }
 

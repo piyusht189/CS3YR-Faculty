@@ -35,9 +35,9 @@ public class Notice_tab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.notice_tab1, container, false);
 
-        editText = (EditText)view.findViewById(R.id.stud_notice_text);
-        listView = (ListView)view.findViewById(R.id.listView_stud_notice);
-        final Button button = (Button)view.findViewById(R.id.stud_notice_send_button);
+        editText = (EditText)view.findViewById(R.id.teach_notice_text);
+        listView = (ListView)view.findViewById(R.id.listView_teach_notice);
+        final Button button = (Button)view.findViewById(R.id.teach_notice_send_button);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -68,7 +68,7 @@ public class Notice_tab1 extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isNetworkAvailable()) {
-                    onClickSendStudNotice();
+                    onClickSendTeachNotice();
                 } else {
                     Toast.makeText(getContext(), R.string.internet_not_connect, Toast.LENGTH_SHORT).show();
                 }
@@ -82,7 +82,7 @@ public class Notice_tab1 extends Fragment {
     {
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"Fetching...","Please wait",false,false);
 
-        String url = getActivity().getResources().getString(R.string.allfaculty_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.allfaculty_notice_url);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
         ref.addValueEventListener(new ValueEventListener() {
@@ -114,13 +114,13 @@ public class Notice_tab1 extends Fragment {
         });
     }
 
-    public void onClickSendStudNotice()
+    public void onClickSendTeachNotice()
     {
-        String url = getActivity().getResources().getString(R.string.allfaculty_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.allfaculty_notice_url);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
 
         Notice_Structure notice_structure = new Notice_Structure();
-        notice_structure.setName(getName());
+        notice_structure.setName(Data.getName(getActivity()));
         notice_structure.setMessage(editText.getText().toString());
         ref.push().setValue(notice_structure);
         editText.setText("");
@@ -135,8 +135,5 @@ public class Notice_tab1 extends Fragment {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public String getName()
-    {
-        return "Piyush";
-    }
+
 }

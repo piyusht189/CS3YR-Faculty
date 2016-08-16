@@ -1,8 +1,8 @@
 package piyush.almanac.cs3yr_faculty;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,10 +37,11 @@ public class Feedback extends AppCompatActivity {
 
 
     }
-    public  void feedbackbtn(View view)
-    {
-        final ProgressDialog pDialog = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
 
+    public  void feedbackbtn(View view)
+    {   feedback=(EditText) findViewById(R.id.feedback);
+        final ProgressDialog pDialog = ProgressDialog.show(this,"Loading...","Please wait...",false,false);
+        final String msg=Data.getEmail(Feedback.this)+":"+feedback.getText().toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -67,8 +68,8 @@ public class Feedback extends AppCompatActivity {
                 Map<String,String> params = new Hashtable<>();
 
                 //Adding parameters
-                //  params.put("email", email);
-
+                params.put("email", Data.getEmail(Feedback.this));
+                params.put("feedback", msg);
 
                 //returning parameters
                 return params;

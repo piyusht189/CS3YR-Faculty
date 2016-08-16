@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Name"
+            android:id="@+id/textViewTeachName"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="15dp"
+            android:textColor="#6b3293" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Email"
+            android:id="@+id/textViewTeachEmail"
+            android:layout_toRightOf="@+id/textView9"
+            android:layout_marginTop="13dp"
+            android:layout_marginLeft="10dp"
+            android:autoLink="email"
+            android:textSize="14dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Phone"
+            android:id="@+id/textViewPhone"
+            android:layout_below="@+id/textViewTeachName"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:autoLink="phone"
+            android:textSize="15dp"
+            android:layout_marginBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="-----"
+            android:id="@+id/textView9"
+            android:layout_alignTop="@+id/textViewTeachName"
+            android:layout_toRightOf="@+id/textViewTeachName"
+            android:layout_toEndOf="@+id/textViewTeachName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="10dp"
+            android:textColor="#000000" />
+
+    </RelativeLayout>
+</LinearLayout>

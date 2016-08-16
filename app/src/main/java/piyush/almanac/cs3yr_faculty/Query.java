@@ -37,11 +37,13 @@ public class Query extends AppCompatActivity {
         ButterKnife.bind(Query.this);
 
 
+
     }
 
     public void querybtn(View view) {
         final ProgressDialog pDialog = ProgressDialog.show(this, "Loading...", "Please wait...", false, false);
-
+        query=(EditText) findViewById(R.id.query);
+        final String msg=Data.getEmail(Query.this)+":"+query.getText().toString();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, login_url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -67,7 +69,8 @@ public class Query extends AppCompatActivity {
                 Map<String, String> params = new Hashtable<>();
 
                 //Adding parameters
-                //  params.put("email", email);
+                 params.put("email",Data.getEmail(Query.this));
+                params.put("query", msg);
 
 
                 //returning parameters

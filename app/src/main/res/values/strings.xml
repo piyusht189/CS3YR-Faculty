@@ -55,7 +55,7 @@
     <string name="title_activity_main">MainActivity</string>
 
     <!--LoadContent.java-->
-    <string name="load_url">http://kgbvbundu.org/cs2014/getfulldata.php</string>
+    <string name="load_url">http://kgbvbundu.org/cs2014teach/getfulldata.php</string>
     <string name="Internet_Not_Connected">Internet is required to download the content</string>
 
     <!--Extras-->

@@ -8,31 +8,32 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 /**
- * Created by Super-Nova on 11-08-2016.
+ * Created by Super-Nova on 15-08-2016.
  */
-public class Faculty_List extends ArrayAdapter<String> {
+public class Teachers_list extends ArrayAdapter<String> {
 
     Activity context;
     String[] name,email,phone;
 
     TextView textViewName,textViewEmail,textViewPhone;
 
-    public Faculty_List(Activity context, String[] name, String[] email, String[] phone) {
-        super(context, R.layout.teachers_structure, name);
+    public Teachers_list(Activity context, String[] name, String[] email, String[] phone, String[] roll) {
+        super(context, R.layout.teacher_structure, name);
         this.context = context;
         this.name = name;
         this.email = email;
         this.phone = phone;
+
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.teachers_structure,null,true);
+        View view = inflater.inflate(R.layout.student_structure,null,true);
 
         textViewName = (TextView)view.findViewById(R.id.textViewTeachName);
         textViewEmail = (TextView)view.findViewById(R.id.textViewTeachEmail);
-        textViewPhone = (TextView)view.findViewById(R.id.phone);
+        textViewPhone = (TextView)view.findViewById(R.id.textViewPhone);
 
 
         textViewName.setText(name[position]);

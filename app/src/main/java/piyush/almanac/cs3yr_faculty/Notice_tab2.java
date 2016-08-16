@@ -30,7 +30,8 @@ public class Notice_tab2 extends Fragment {
     ListView listView;
     EditText editText;
     Spinner spinner;
-    String arr[]={"piyush","Mayank"};
+    String arr[];
+    String name;
     public Notice_tab2(){
     }
     @Override
@@ -40,6 +41,13 @@ public class Notice_tab2 extends Fragment {
         listView = (ListView)view.findViewById(R.id.listView_teach_notice);
         final Button button = (Button)view.findViewById(R.id.batch_notice_send_button);
         spinner = (Spinner) view.findViewById(R.id.spinner2);
+
+
+        for(int i=0;i<10;i++)
+        {
+            arr[i]=Data.getSections(getActivity(),i);
+        }
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arr);
 
@@ -51,10 +59,10 @@ public class Notice_tab2 extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String name= spinner.getSelectedItem().toString();
-                Toast.makeText(getActivity(), "Selected ", Toast.LENGTH_SHORT).show();
+                name= spinner.getSelectedItem().toString();
+                Toast.makeText(getActivity(), name+"Batch", Toast.LENGTH_SHORT).show();
 
-
+                TeacherNoticeSet(name);
             }
 
             @Override
@@ -85,7 +93,7 @@ public class Notice_tab2 extends Fragment {
         });
 
         if (isNetworkAvailable()) {
-            TeacherNoticeSet();
+            TeacherNoticeSet(name);
         } else {
             Toast.makeText(getContext(), R.string.internet_not_connect, Toast.LENGTH_SHORT).show();
         }
@@ -93,7 +101,7 @@ public class Notice_tab2 extends Fragment {
             @Override
             public void onClick(View view) {
                 if (isNetworkAvailable()) {
-                    onClickSendStudNotice();
+                    onClickSendStudNotice(name);
                 } else {
                     Toast.makeText(getContext(), R.string.internet_not_connect, Toast.LENGTH_SHORT).show();
                 }
@@ -103,11 +111,11 @@ public class Notice_tab2 extends Fragment {
         return view;
     }
 
-    public void TeacherNoticeSet()
+    public void TeacherNoticeSet(String name2)
     {
         final ProgressDialog progressDialog = ProgressDialog.show(getActivity(),"Fetching...","Please wait",false,false);
 
-        String url = getActivity().getResources().getString(R.string.recent_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.recent_notice_url)+name2;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
 
         ref.addValueEventListener(new ValueEventListener() {
@@ -140,13 +148,13 @@ public class Notice_tab2 extends Fragment {
         });
     }
 
-    public void onClickSendStudNotice()
+    public void onClickSendStudNotice(String name1)
     {
-        String url = getActivity().getResources().getString(R.string.recent_notice_url)+Data.getSection();
+        String url = getActivity().getResources().getString(R.string.recent_notice_url)+name1;
         DatabaseReference ref = FirebaseDatabase.getInstance().getReferenceFromUrl(url);
 
         Notice_Structure notice_structure = new Notice_Structure();
-        notice_structure.setName(getName());
+        notice_structure.setName(Data.getName(getActivity()));
         notice_structure.setMessage(editText.getText().toString());
         ref.push().setValue(notice_structure);
         editText.setText("");
@@ -161,8 +169,5 @@ public class Notice_tab2 extends Fragment {
         return networkInfo != null && networkInfo.isConnected();
     }
 
-    public String getName()
-    {
-        return "Piyush";
-    }
+
 }
