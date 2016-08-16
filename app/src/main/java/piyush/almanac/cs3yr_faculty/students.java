@@ -27,6 +27,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Students extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     ListView listView;
@@ -39,10 +42,18 @@ public class Students extends AppCompatActivity
         setContentView(R.layout.activity_students);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        for(int i=0;i<10;i++)
+        try {
+            JSONArray te = Data.getSections(Students.this);
+            for (int i = 0; i < te.length(); i++) {
+                JSONObject d = te.getJSONObject(i);
+                arr[i] = d.getString("section");
+            }
+        }catch (Exception e)
         {
-            arr[i]=Data.getSections(getApplicationContext(),i);
+            e.printStackTrace();
+
         }
+
         spinner = (Spinner) findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, arr);

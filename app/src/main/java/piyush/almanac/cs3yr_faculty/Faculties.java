@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Faculties extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,22 +30,33 @@ public class Faculties extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         listView = (ListView)findViewById(R.id.faculties_list_view);
-        for (int i=0;i<50;i++)
+       try {
+           JSONArray te = Data.getTeacherEmail(Faculties.this);
+           for (int i = 0; i < te.length(); i++) {
+               JSONObject d = te.getJSONObject(i);
+               temail[i]=d.getString("temail");
+           }
+           JSONArray tn = Data.getTeacherName(Faculties.this);
+           for (int i = 0; i < te.length(); i++) {
+               JSONObject d = tn.getJSONObject(i);
+               tname[i]=d.getString("tname");
+           }
+           JSONArray tp = Data.getTeacherPhone(Faculties.this);
+           for (int i = 0; i < te.length(); i++) {
+               JSONObject d = tp.getJSONObject(i);
+                 phone[i]=d.getString("phone");
+           }
+
+           Faculty_List adapter = new Faculty_List(Faculties.this,tname,temail,phone);
+           listView.setAdapter(adapter);
+
+       }catch (Exception e)
         {
-            tname[i]=Data.getTeacherName(i,Faculties.this);
-        }
-        for (int i=0;i<50;i++)
-        {
-            temail[i]=Data.getTeacherEmail(i,Faculties.this);
-        }
-        for (int i=0;i<50;i++)
-        {
-            phone[i]=Data.getTeacherPhone(i,Faculties.this);
+            e.printStackTrace();
+
         }
 
 
-        Faculty_List adapter = new Faculty_List(Faculties.this,tname,temail,phone);
-        listView.setAdapter(adapter);
 
 
 

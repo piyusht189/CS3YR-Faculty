@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity
         // Setting the ViewPager For the SlidingTabsLayout
         tabs.setViewPager(pager);
 
-
+         String b=Data.getPhone(MainActivity.this);
+        Toast.makeText(MainActivity.this,b,Toast.LENGTH_LONG).show();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

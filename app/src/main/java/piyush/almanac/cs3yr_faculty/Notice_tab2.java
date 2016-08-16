@@ -25,6 +25,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Notice_tab2 extends Fragment {
 
     ListView listView;
@@ -43,10 +46,17 @@ public class Notice_tab2 extends Fragment {
         spinner = (Spinner) view.findViewById(R.id.spinner2);
 
 
-        for(int i=0;i<10;i++)
-        {
-            arr[i]=Data.getSections(getActivity(),i);
-        }
+        try {
+            JSONArray te = Data.getSections(getActivity());
+            for (int i = 0; i < te.length(); i++) {
+                JSONObject d = te.getJSONObject(i);
+                arr[i] = d.getString("section");
+            }
+        }catch (Exception e)
+            {
+                e.printStackTrace();
+
+            }
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, arr);

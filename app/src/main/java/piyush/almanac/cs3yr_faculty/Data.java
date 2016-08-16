@@ -104,17 +104,14 @@ public class Data {
         }
     }
 
-    public static String getTeacherName(int pos,Context context)
+    public static JSONArray getTeacherName(Context context)
     {
-         String name;
+
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(context));
             JSONArray jsonArray = jsonObject.getJSONArray("teachers");
 
-                JSONObject jsonObject1 = jsonArray.getJSONObject(pos);
-                name=jsonObject1.getString("tname");
-
-            return name;
+            return jsonArray;
         }
         catch (Exception e)
         {
@@ -124,18 +121,18 @@ public class Data {
     }
 
 
-    public static String getTeacherEmail(int pos,Context context)
+    public static JSONArray getTeacherEmail(Context context)
     {
-        String email;
+
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(context));
             JSONArray jsonArray = jsonObject.getJSONArray("teachers");
 
-                JSONObject jsonObject1 = jsonArray.getJSONObject(pos);
 
-                    email= jsonObject1.getString("temail");
 
-            return email;
+
+
+            return jsonArray;
         }
         catch (Exception e)
         {
@@ -144,18 +141,13 @@ public class Data {
         }
     }
 
-    public static String getTeacherPhone(int pos,Context context)
+    public static JSONArray getTeacherPhone(Context context)
     {
-        String phone;
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(context));
             JSONArray jsonArray = jsonObject.getJSONArray("teachers");
 
-                JSONObject jsonObject1 = jsonArray.getJSONObject(pos);
-
-                   phone= jsonObject1.getString("phone");
-
-            return phone;
+            return jsonArray;
         }
         catch (Exception e)
         {
@@ -164,15 +156,13 @@ public class Data {
         }
     }
 
-    public static String getSections(Context context,int pos)
+    public static JSONArray getSections(Context context)
     {
         String sec;
         try {
             JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(context));
             JSONArray jsonArray = jsonObject.getJSONArray("sections");
-            JSONObject jsonObject1 = jsonArray.getJSONObject(pos);
-            sec= jsonObject1.getString("section");
-            return  sec;
+            return  jsonArray;
         }
         catch (Exception e)
         {

@@ -36,7 +36,7 @@ public class myprofile extends AppCompatActivity
 
     ImageView profilepic;
     TextView name,email,designation,description,phone;
-
+    String em=Data.getEmail(myprofile.this);
     private static final int PICK_IMAGE_ID1 = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,17 +45,19 @@ public class myprofile extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         profilepic = (ImageView)findViewById(R.id.profilepic);
 
         name = (TextView)findViewById(R.id.name);
         email = (TextView)findViewById(R.id.email);
         designation = (TextView)findViewById(R.id.designation);
-        description = (TextView)findViewById(R.id.description);
+        description = (TextView)findViewById(R.id.summary);
         phone = (TextView)findViewById(R.id.phone);
 
-
-        profilepic.setImageBitmap(Data.getSavedImage(myprofile.this,"ProfilePic"));
-
+        if(Data.getSavedImage(myprofile.this,"ProfilePic")!=null) {
+            profilepic.setImageBitmap(Data.getSavedImage(myprofile.this, "ProfilePic"));
+        }
 
         name.setText(Data.getName(myprofile.this));
         email.setText(Data.getEmail(myprofile.this));
@@ -219,7 +221,7 @@ public class myprofile extends AppCompatActivity
 
                     //Adding parameters
                     params.put("image", image);
-                    params.put("email", Data.getEmail(myprofile.this));
+                    params.put("email",em);
 
                     //returning parameters
                     return params;

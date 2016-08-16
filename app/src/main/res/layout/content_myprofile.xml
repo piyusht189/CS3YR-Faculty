@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".MyProfile"
+    tools:context=".myprofile"
     tools:showIn="@layout/app_bar_myprofile"
     android:background="#e1e1e1">
 
@@ -31,7 +31,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:id="@+id/profilepic" />
+        android:id="@+id/profilepic"
+        android:onClick="onClickPicUpload"/>
 
     <TextView
         android:layout_width="wrap_content"

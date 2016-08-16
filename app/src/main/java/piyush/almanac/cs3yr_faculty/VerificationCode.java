@@ -64,7 +64,7 @@ public class VerificationCode extends AppCompatActivity {
                         if (response.equals(getString(R.string.verifycode_Successresponse))) {
                             savedata2(loadData());
                             savedata1("");
-                            startActivity(new Intent(VerificationCode.this, MainActivity.class));
+                            startActivity(new Intent(VerificationCode.this, LoadContent.class));
                             finish();
                         }
                         else if(response.equals(getString(R.string.verifycode_Failedresponse))){

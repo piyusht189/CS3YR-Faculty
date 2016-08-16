@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,7 +42,7 @@ public class LoadContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_load_content);
-
+        requestQueue = Volley.newRequestQueue(LoadContent.this);
         if(isNetworkAvailable()) {
             savealldata();
             storeImagesRoutine();
@@ -70,6 +71,7 @@ public class LoadContent extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try
                 {
+                    Toast.makeText(LoadContent.this,response.toString(),Toast.LENGTH_LONG).show();
                     FileOutputStream fos = openFileOutput("details", MODE_PRIVATE);
                     fos.write(response.toString().getBytes());
                     fos.close();
@@ -133,7 +135,7 @@ public class LoadContent extends AppCompatActivity {
             }
             bis.close();
             fis.close();
-            Toast.makeText(context,b.toString(),Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context,b.toString(),Toast.LENGTH_SHORT).show();
             return b.toString();
         }
         catch (Exception e) {
@@ -154,7 +156,7 @@ public class LoadContent extends AppCompatActivity {
             new SaveImageAsync().execute(jsonObject1.getString("thurs"),"Thursday");
             new SaveImageAsync().execute(jsonObject1.getString("fri"),"Friday");
             new SaveImageAsync().execute(jsonObject1.getString("sat"),"Saturday");
-            new SaveImageAsync().execute(jsonObject1.getString("main"),"FullTT");
+           // new SaveImageAsync().execute(jsonObject1.getString("main"),"FullTT");
             storeImageProfilePic();
         }
         catch (Exception e)
