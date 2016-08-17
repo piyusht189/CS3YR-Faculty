@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -60,6 +62,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        View headerview =navigationView.getHeaderView(0);
+        TextView tx=(TextView) headerview.findViewById(R.id.name);
+        tx.setText("Hello, "+Data.getName(MainActivity.this));
+
+
     }
 
     @Override
@@ -68,6 +77,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+
             super.onBackPressed();
         }
     }
@@ -90,12 +100,11 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.feed) {
             startActivity(new Intent(this,Feedback.class));
-            finish();
+
             return true;
         }
         if (id == R.id.aboutdev) {
             startActivity(new Intent(this,AboutDeveloper.class));
-            finish();
             return true;
         }
         if (id == R.id.logout) {
@@ -109,12 +118,12 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.uf) {
             startActivity(new Intent(this,UpcomingFeatures.class));
-            finish();
+
             return true;
         }
         if (id == R.id.query) {
             startActivity(new Intent(this,Query.class));
-            finish();
+
             return true;
         }
 
@@ -129,14 +138,15 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.notices) {
             startActivity(new Intent(this,Notices.class));
+            finish();
         } else if (id == R.id.myprofile) {
-            startActivity(new Intent(this,myprofile.class));
+            startActivity(new Intent(this,myprofile.class));finish();
         } else if (id == R.id.students) {
-            startActivity(new Intent(this,Students.class));
+            startActivity(new Intent(this,Students.class));finish();
         } else if (id == R.id.faculties) {
-            startActivity(new Intent(this,Faculties.class));
+            startActivity(new Intent(this,Faculties.class));finish();
         } else if (id == R.id.today) {
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this,MainActivity.class));finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -35,10 +35,11 @@
         android:scrollIndicators="right"
         android:background="#ccf2f9" />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SUBMIT !"
+        android:background="@drawable/feed"
         android:id="@+id/feedbackbtn"
         android:layout_below="@+id/feedback"
         android:layout_centerHorizontal="true"

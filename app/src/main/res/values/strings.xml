@@ -39,7 +39,7 @@
 
 
     <!--activity_login.xml-->
-    <string name="login_email">Enter Email(Example: 14XXXXX@kiit.ac.in)</string>
+    <string name="login_email">Enter Email(Official KIIT Email)</string>
     <string name="login_password">Enter Password</string>
     <string name="login_button">Login</string>
     <string name="logintosignuptext">Dont Have an account? Sign Up</string>
@@ -94,5 +94,6 @@
     <!--ImagePicker.java-->
     <string name="pick_image_intent_text">Image</string>
 
-
+    <!--UF-->
+     <string name="uf">Upcoming Features!</string>
 </resources>

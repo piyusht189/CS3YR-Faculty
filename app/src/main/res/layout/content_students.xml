@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/b5"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Students"
     tools:showIn="@layout/app_bar_students">
@@ -30,7 +31,8 @@
         android:background="#8fbcb0"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:gravity="center|center_horizontal" />
 
 
     <ListView

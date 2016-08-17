@@ -3,8 +3,12 @@ package piyush.almanac.cs3yr_faculty;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,8 +51,11 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(Login.this, VerificationCode.class));
             finish();
         } else if (!loadData1().equals("")) {
-            startActivity(new Intent(Login.this, LoadContent.class));
-            finish();
+
+                 startActivity(new Intent(Login.this, MainActivity.class));
+                 finish();
+
+
         }
 
     }
@@ -72,7 +79,7 @@ public class Login extends AppCompatActivity {
                 pDialog.dismiss();
                 if(response.equals(getString(R.string.login_Successresponse))) {
                     savedata(email);
-                    startActivity(new Intent(Login.this,MainActivity.class));
+                    startActivity(new Intent(Login.this,LoadContent.class));
                     finish();
                 }
                 else if(response.equals(getString(R.string.login_Pendingresponse))) {
@@ -154,28 +161,49 @@ public class Login extends AppCompatActivity {
         }
         return out;
     }
-
-    /*  protected String loadData3() {
-          String FILENAME = "id.txt";
-          String out = "";
-
-          try {
-              FileInputStream fis1 = getApplication().openFileInput(FILENAME);
-              BufferedReader br1 = new BufferedReader(new InputStreamReader(fis1));
-              String sLine1;
-              while (((sLine1 = br1.readLine()) != null)) {
-                  out += sLine1;
-              }
-          }catch (Exception e){
-              e.printStackTrace();
-          }
-          return out;
-      }
-  */
+    public boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager)getApplication().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
     public void onClickLoginToSignUp(View view)
     {
         startActivity(new Intent(Login.this,Register.class));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.login_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+
+        if (id == R.id.aboutdev) {
+            startActivity(new Intent(this,AboutDeveloper.class));
+
+            return true;
+        }
+
+        if (id == R.id.uf) {
+            startActivity(new Intent(this,UpcomingFeatures.class));
+
+            return true;
+        }
+        if (id == R.id.query) {
+            startActivity(new Intent(this,Query.class));
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

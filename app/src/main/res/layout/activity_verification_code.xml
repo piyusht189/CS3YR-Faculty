@@ -19,7 +19,8 @@
         android:id="@+id/verificationtext"
         android:layout_centerVertical="true"
 
-        android:hint="@string/verificationtext_hint" />
+        android:hint="@string/verificationtext_hint"
+        android:gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
         android:id="@+id/verify_button"
         android:layout_below="@+id/verificationtext"
         android:layout_centerHorizontal="true"
-        android:onClick="verifybtn" />
+        android:onClick="verifybtn"
+        android:layout_marginTop="15dp" />
 
 
 </RelativeLayout>

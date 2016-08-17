@@ -1,6 +1,7 @@
 package piyush.almanac.cs3yr_faculty;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -71,6 +72,7 @@ public class LoadContent extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 try
                 {
+                     ProgressDialog p=ProgressDialog.show(LoadContent.this,"Fetching your details","plaese wait");
                     Toast.makeText(LoadContent.this,response.toString(),Toast.LENGTH_LONG).show();
                     FileOutputStream fos = openFileOutput("details", MODE_PRIVATE);
                     fos.write(response.toString().getBytes());
@@ -155,9 +157,11 @@ public class LoadContent extends AppCompatActivity {
             new SaveImageAsync().execute(jsonObject1.getString("wed"),"Wednesday");
             new SaveImageAsync().execute(jsonObject1.getString("thurs"),"Thursday");
             new SaveImageAsync().execute(jsonObject1.getString("fri"),"Friday");
-            new SaveImageAsync().execute(jsonObject1.getString("sat"),"Saturday");
-           // new SaveImageAsync().execute(jsonObject1.getString("main"),"FullTT");
+            if(jsonObject1.getString("main")!=null){
+                new SaveImageAsync().execute(jsonObject1.getString("full"),"FullTT");
+            }
             storeImageProfilePic();
+            new SaveImageAsync1().execute(jsonObject1.getString("sat"),"Saturday");
         }
         catch (Exception e)
         {
@@ -180,6 +184,7 @@ public class LoadContent extends AppCompatActivity {
     }
 
     class SaveImageAsync extends AsyncTask<String, String, String> {
+        ProgressDialog p = ProgressDialog.show(LoadContent.this,"Fetching your Routine","please wait");
         @Override
         protected void onPreExecute()
         {
@@ -191,9 +196,34 @@ public class LoadContent extends AppCompatActivity {
             return "1";
         }
         protected void onPostExecute(String message) {
+            p.dismiss();
             if(!String.valueOf(1).equals(message))
             {
                 Toast.makeText(LoadContent.this,"Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+    }
+
+    class SaveImageAsync1 extends AsyncTask<String, String, String> {
+        ProgressDialog p = ProgressDialog.show(LoadContent.this,"Fetching your Routine","please wait");
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+        @Override
+        protected String doInBackground(String... args) {
+            saveImage(getApplicationContext(),args[1],getBitmapFromURL(args[0]));
+            return "1";
+        }
+        protected void onPostExecute(String message) {
+            p.dismiss();
+            if(!String.valueOf(1).equals(message))
+            {
+                Toast.makeText(LoadContent.this,"Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+            }else {
+                startActivity(new Intent(LoadContent.this,MainActivity.class));
             }
         }
 

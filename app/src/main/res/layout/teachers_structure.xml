@@ -14,7 +14,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:textSize="15dp"
-            android:textColor="#6b3293" />
+            android:textColor="#3a1850" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
             android:id="@+id/textViewPhone"
             android:layout_below="@+id/textViewTeachName"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="12dp"
             android:autoLink="phone"
             android:textSize="15dp"
             android:layout_marginBottom="20dp" />
@@ -50,7 +50,7 @@
             android:layout_alignTop="@+id/textViewTeachName"
             android:layout_toRightOf="@+id/textViewTeachName"
             android:layout_toEndOf="@+id/textViewTeachName"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="4dp"
             android:layout_marginLeft="10dp"
             android:textSize="10dp"
             android:textColor="#000000" />

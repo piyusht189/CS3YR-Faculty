@@ -152,6 +152,9 @@ public class Students extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            Intent g=new Intent(this,MainActivity.class);
+            startActivity(g);
+            finish();
             super.onBackPressed();
         }
     }
@@ -173,12 +176,12 @@ public class Students extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.feed) {
             startActivity(new Intent(this,Feedback.class));
-            finish();
+
             return true;
         }
         if (id == R.id.aboutdev) {
             startActivity(new Intent(this,AboutDeveloper.class));
-            finish();
+
             return true;
         }
         if (id == R.id.logout) {
@@ -190,12 +193,12 @@ public class Students extends AppCompatActivity
         }
         if (id == R.id.uf) {
             startActivity(new Intent(this,UpcomingFeatures.class));
-            finish();
+
             return true;
         }
         if (id == R.id.query) {
             startActivity(new Intent(this,Query.class));
-            finish();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -208,15 +211,15 @@ public class Students extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.notices) {
-            startActivity(new Intent(this,Notices.class));
+            startActivity(new Intent(this,Notices.class));finish();
         } else if (id == R.id.myprofile) {
-            startActivity(new Intent(this,myprofile.class));
+            startActivity(new Intent(this,myprofile.class));finish();
         } else if (id == R.id.students) {
-            startActivity(new Intent(this,Students.class));
+            startActivity(new Intent(this,Students.class));finish();
         } else if (id == R.id.faculties) {
-            startActivity(new Intent(this,Faculties.class));
+            startActivity(new Intent(this,Faculties.class));finish();
         } else if (id == R.id.today) {
-            startActivity(new Intent(this,MainActivity.class));
+            startActivity(new Intent(this,MainActivity.class));finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
