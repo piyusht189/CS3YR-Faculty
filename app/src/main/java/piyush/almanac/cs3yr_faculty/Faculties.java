@@ -15,6 +15,8 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+
 public class Faculties extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -114,8 +116,10 @@ public class Faculties extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            Logout logout = new Logout();
-            logout.onLogout();
+            File dir = getFilesDir();
+            File file = new File(dir, "email.txt");
+            file.delete();
+            startActivity(new Intent(Faculties.this,Login.class));
             finish();
 
             return true;

@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.File;
+
 public class Notices extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     CharSequence Titles[] = {"All Faculty","Send Notice","Public Notice"};
@@ -96,8 +98,10 @@ public class Notices extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            Logout logout = new Logout();
-            logout.onLogout();
+            File dir = getFilesDir();
+            File file = new File(dir, "email.txt");
+            file.delete();
+            startActivity(new Intent(Notices.this,Login.class));
             finish();
 
             return true;

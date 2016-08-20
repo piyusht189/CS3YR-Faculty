@@ -37,6 +37,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -129,10 +130,11 @@ public class myprofile extends AppCompatActivity
             return true;
         }
         if (id == R.id.logout) {
-            Logout logout = new Logout();
-            logout.onLogout();
+            File dir = getFilesDir();
+            File file = new File(dir, "email.txt");
+            file.delete();
+            startActivity(new Intent(myprofile.this,Login.class));
             finish();
-
             return true;
         }
         if (id == R.id.uf) {
