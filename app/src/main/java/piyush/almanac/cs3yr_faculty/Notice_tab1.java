@@ -5,6 +5,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +39,7 @@ public class Notice_tab1 extends Fragment {
 
         editText = (EditText)view.findViewById(R.id.teach_notice_text);
         listView = (ListView)view.findViewById(R.id.listView_teach_notice);
-        final Button button = (Button)view.findViewById(R.id.teach_notice_send_button);
+        final ImageButton button = (ImageButton)view.findViewById(R.id.teach_notice_send_button);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

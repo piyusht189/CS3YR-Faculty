@@ -1,8 +1,12 @@
 package piyush.almanac.cs3yr_faculty;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,15 +23,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -36,7 +51,7 @@ public class myprofile extends AppCompatActivity
 
     ImageView profilepic;
     TextView name,email,designation,description,phone;
-    String em=Data.getEmail(myprofile.this);
+    String em;
     private static final int PICK_IMAGE_ID1 = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -176,6 +191,7 @@ public class myprofile extends AppCompatActivity
     private void uploadImage(final Bitmap bitmap){
 
         if(bitmap!=null) {
+            em=Data.getEmail(myprofile.this);
             //Showing the progress dialog
             final ProgressDialog loading = ProgressDialog.show(this,"Uploading...","Please wait...",false,false);
             String UPLOAD_URL="http://kgbvbundu.org/cs2014teach/profilepic/uploadprofilepic.php";
@@ -188,6 +204,7 @@ public class myprofile extends AppCompatActivity
                             loading.dismiss();
                             //Showing toast message of the response
                             if(s.equalsIgnoreCase("Success")) {
+                                saveData();
                                 Toast.makeText(myprofile.this, "Pic Uploaded" , Toast.LENGTH_LONG).show();
                             }
                         }
@@ -202,15 +219,7 @@ public class myprofile extends AppCompatActivity
 
                     String body;
                     //get response body and parse with appropriate encoding
-                    if(volleyError.networkResponse.data!=null) {
-                        try {
-                            body = new String(volleyError.networkResponse.data,"UTF-8");
-                            Toast.makeText(myprofile.this,body, Toast.LENGTH_SHORT).show();
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                            Toast.makeText(myprofile.this,e.toString(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
+
                 }
             }){
                 @Override
@@ -229,6 +238,10 @@ public class myprofile extends AppCompatActivity
                     return params;
                 }
             };
+            stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    50000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
             //Creating a Request Queue
             RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -246,6 +259,121 @@ public class myprofile extends AppCompatActivity
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+    public void saveData()
+    {
+        String email = Data.getEmail(myprofile.this);
+
+        JSONObject params = new JSONObject();
+        try {
+            params.put("emai", email);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String load_url = getResources().getString(R.string.load_url);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, load_url,params, new Response.Listener<JSONObject>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(JSONObject response) {
+                try
+                {
+                    FileOutputStream fos = openFileOutput("details", MODE_PRIVATE);
+                    fos.write(response.toString().getBytes());
+                    fos.close();
+                    storeProfilePic();
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(myprofile.this,"Failed. Try Again Later",Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(myprofile.this,"Internet is slow. Please try again with good internet speed.",Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<>();
+                headers.put("Content-Type", "application/json; charset=utf-8");
+                return headers;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(myprofile.this);
+
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void storeProfilePic()
+    {
+        try {
+            JSONObject jsonObject2 = new JSONObject(new LoadContent().getStringFromJson(myprofile.this));
+            JSONArray jsonArray2 = jsonObject2.getJSONArray("teachdetails");
+            JSONObject jsonObject3 = jsonArray2.getJSONObject(0);
+            if(jsonObject3.getString("profilepic")!=null)
+            {
+                new SaveImageAsync().execute(jsonObject3.getString("profilepic"),"ProfilePic");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    class SaveImageAsync extends AsyncTask<String, String, String> {
+
+        ProgressDialog pDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = ProgressDialog.show(myprofile.this,"Fetching Your Profile Pic...","Please Wait...",false,false);
+        }
+        @Override
+        protected String doInBackground(String... args) {
+            saveImage(getApplicationContext(),args[1],getBitmapFromURL(args[0]));
+            return "1";
+        }
+        protected void onPostExecute(String message) {
+            pDialog.dismiss();
+            if(!String.valueOf(1).equals(message)) {
+                Toast.makeText(myprofile.this,"Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public Bitmap getBitmapFromURL(String src)
+    {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private void saveImage(Context context, String name, Bitmap bitmap){
+        name=name+".JPG";
+        FileOutputStream out;
+        try {
+            out = context.openFileOutput(name, Context.MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, out);
+            out.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

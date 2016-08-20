@@ -45,20 +45,27 @@
 
         <activity android:name=".LoadContent" />
         <activity android:name=".VerificationCode"
+            android:label="Verify account"
            />
         <activity android:name=".Feedback"
+            android:label="Feedback"
            />
         <activity android:name=".AboutDeveloper"
+            android:label="About Devs"
             />
         <activity android:name=".UpcomingFeatures"
+            android:label="Upcoming Features"
            />
         <activity android:name=".Query"
+            android:label="Send Query"
             />
         <activity android:name=".Register"
+            android:label="Register-CS 3rd YR"
             >
 
         </activity>
-<activity android:name=".Login">
+<activity android:name=".Login"
+    android:label="CS 3rd YR-Faculty">
     <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

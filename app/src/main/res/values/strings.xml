@@ -6,8 +6,8 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_notices">Notices</string>
-    <string name="title_activity_myprofile">myprofile</string>
-    <string name="title_activity_students">students</string>
+    <string name="title_activity_myprofile">My Profile</string>
+    <string name="title_activity_students">Students</string>
     <string name="title_activity_faculties">Faculties</string>
 
     <!--Register.java-->
@@ -59,6 +59,7 @@
     <string name="Internet_Not_Connected">Internet is required to download the content</string>
 
     <!--Extras-->
+    <string name="Zero_Menu">Update Database</string>
     <string name="First_Menu">Feedback</string>
     <string name="Second_Menu">About Developers</string>
     <string name="Third_Menu">Log Out</string>
@@ -96,4 +97,15 @@
 
     <!--UF-->
      <string name="uf">Upcoming Features!</string>
+
+
+    <!--Feedback.java-->
+    <string name="feedback_url">http://kgbvbundu.org/cs2014/feedback.php</string>
+
+    <!--Query.java-->
+    <string name="query_url">http://kgbvbundu.org/cs2014/query.php</string>
+    <string name="query_success_Message">Query Sent Successfully</string>
+
+
+
 </resources>

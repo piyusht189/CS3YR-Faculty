@@ -11,8 +11,8 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -36,7 +36,7 @@ public class Notice_tab3 extends Fragment {
 
         editText = (EditText)view.findViewById(R.id.public_notice_text);
         listView = (ListView)view.findViewById(R.id.listView_public_notice);
-        final Button button = (Button)view.findViewById(R.id.public_notice_send_button);
+        final ImageButton button = (ImageButton)view.findViewById(R.id.public_notice_send_button);
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override

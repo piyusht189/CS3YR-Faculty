@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class Notice_tab2 extends Fragment {
         View view = inflater.inflate(R.layout.notice_tab2, container, false);
         editText = (EditText)view.findViewById(R.id.batch_notice_text);
         listView = (ListView)view.findViewById(R.id.listView_teach_notice);
-        final Button button = (Button)view.findViewById(R.id.batch_notice_send_button);
+        final ImageButton button = (ImageButton)view.findViewById(R.id.batch_notice_send_button);
         spinner = (Spinner) view.findViewById(R.id.spinner2);
 
 

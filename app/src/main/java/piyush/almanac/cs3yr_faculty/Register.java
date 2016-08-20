@@ -59,6 +59,8 @@ public class Register extends AppCompatActivity {
             startActivity(new Intent(Register.this,VerificationCode.class));
             finish();
         }
+        Toast.makeText(Register.this,"OTP will be sent to your email after registration!!",Toast.LENGTH_LONG).show();
+
     }
 
     @OnClick(R.id.register_button)
@@ -93,6 +95,7 @@ public class Register extends AppCompatActivity {
                                             if(response.equals(getString(R.string.register_Successresponse))) {
                                                 savedata1(email);
                                                 savedata2(getMacid());
+                                                Toast.makeText(Register.this,"OTP has been sent to your email Successfully!!",Toast.LENGTH_LONG).show();
                                                 startActivity(new Intent(Register.this,VerificationCode.class));
                                                 finish();
                                             }

@@ -45,10 +45,10 @@
                 android:textColor="#2b8035" />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:id="@+id/ttimage"
-                android:src="@drawable/sunday"
+                android:src="@drawable/monday"
                 android:focusableInTouchMode="false"
                 android:elevation="90dp"
                 android:focusable="false"

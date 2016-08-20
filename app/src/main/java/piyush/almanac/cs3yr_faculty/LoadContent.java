@@ -39,6 +39,7 @@ import java.util.Map;
 
 public class LoadContent extends AppCompatActivity {
     RequestQueue requestQueue;
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +47,6 @@ public class LoadContent extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(LoadContent.this);
         if(isNetworkAvailable()) {
             savealldata();
-            storeImagesRoutine();
-            startActivity(new Intent(LoadContent.this,MainActivity.class));
-            finish();
         }
         else {
             Toast.makeText(LoadContent.this, R.string.Internet_Not_Connected, Toast.LENGTH_SHORT).show();
@@ -57,6 +55,8 @@ public class LoadContent extends AppCompatActivity {
 
     public void savealldata()
     {
+        final ProgressDialog p = ProgressDialog.show(LoadContent.this,"Fetching All Data","Please Wait",false,false);
+
         JSONObject params = new JSONObject();
         try {
             params.put("emai", loadData());
@@ -70,14 +70,16 @@ public class LoadContent extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(JSONObject response) {
+                p.dismiss();
                 try
                 {
-                     ProgressDialog p=ProgressDialog.show(LoadContent.this,"Fetching your details","plaese wait");
-                    Toast.makeText(LoadContent.this,response.toString(),Toast.LENGTH_LONG).show();
+
                     FileOutputStream fos = openFileOutput("details", MODE_PRIVATE);
                     fos.write(response.toString().getBytes());
                     fos.close();
-                    Toast.makeText(LoadContent.this,"Details Fetched",Toast.LENGTH_SHORT).show();
+
+                  //  Toast.makeText(LoadContent.this,"Details Fetched",Toast.LENGTH_SHORT).show();
+                    storeImagesRoutine();
                 }
                 catch (Exception e)
                 {
@@ -137,7 +139,6 @@ public class LoadContent extends AppCompatActivity {
             }
             bis.close();
             fis.close();
-           // Toast.makeText(context,b.toString(),Toast.LENGTH_SHORT).show();
             return b.toString();
         }
         catch (Exception e) {
@@ -157,10 +158,15 @@ public class LoadContent extends AppCompatActivity {
             new SaveImageAsync().execute(jsonObject1.getString("wed"),"Wednesday");
             new SaveImageAsync().execute(jsonObject1.getString("thurs"),"Thursday");
             new SaveImageAsync().execute(jsonObject1.getString("fri"),"Friday");
-            if(jsonObject1.getString("main")!=null){
+            if(jsonObject1.getString("full")!=null){
                 new SaveImageAsync().execute(jsonObject1.getString("full"),"FullTT");
             }
-            storeImageProfilePic();
+            JSONObject jsonObject2 = new JSONObject(new LoadContent().getStringFromJson(LoadContent.this));
+            JSONArray jsonArray2 = jsonObject2.getJSONArray("teachdetails");
+            JSONObject jsonObject3 = jsonArray2.getJSONObject(0);
+            if(jsonObject3.getString("profilepic")!=null) {
+                new SaveImageAsync().execute(jsonObject3.getString("profilepic"),"ProfilePic");
+            }
             new SaveImageAsync1().execute(jsonObject1.getString("sat"),"Saturday");
         }
         catch (Exception e)
@@ -169,25 +175,12 @@ public class LoadContent extends AppCompatActivity {
         }
     }
 
-    public void storeImageProfilePic()
-    {
-        try {
-            JSONObject jsonObject = new JSONObject(new LoadContent().getStringFromJson(LoadContent.this));
-            JSONArray jsonArray = jsonObject.getJSONArray("teachdetails");
-            JSONObject jsonObject1 = jsonArray.getJSONObject(0);
-            new SaveImageAsync().execute(jsonObject1.getString("profilepic"),"ProfilePic");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
     class SaveImageAsync extends AsyncTask<String, String, String> {
-        ProgressDialog p = ProgressDialog.show(LoadContent.this,"Fetching your Routine","please wait");
+        ProgressDialog pd;
         @Override
         protected void onPreExecute()
         {
+            pd = ProgressDialog.show(LoadContent.this,"Fetching your Routine","please wait");
             super.onPreExecute();
         }
         @Override
@@ -196,21 +189,25 @@ public class LoadContent extends AppCompatActivity {
             return "1";
         }
         protected void onPostExecute(String message) {
-            p.dismiss();
+            pd.dismiss();
             if(!String.valueOf(1).equals(message))
             {
                 Toast.makeText(LoadContent.this,"Failed. Please Try Again",Toast.LENGTH_SHORT).show();
+            } else
+            {
+                count++;
             }
         }
 
     }
 
     class SaveImageAsync1 extends AsyncTask<String, String, String> {
-        ProgressDialog p = ProgressDialog.show(LoadContent.this,"Fetching your Routine","please wait");
+        ProgressDialog pd1;
         @Override
         protected void onPreExecute()
         {
-            super.onPreExecute();
+
+            pd1 = ProgressDialog.show(LoadContent.this,"Fetching your Routine...","please wait");super.onPreExecute();
         }
         @Override
         protected String doInBackground(String... args) {
@@ -218,12 +215,13 @@ public class LoadContent extends AppCompatActivity {
             return "1";
         }
         protected void onPostExecute(String message) {
-            p.dismiss();
+            pd1.dismiss();
             if(!String.valueOf(1).equals(message))
             {
                 Toast.makeText(LoadContent.this,"Failed. Please Try Again",Toast.LENGTH_SHORT).show();
             }else {
                 startActivity(new Intent(LoadContent.this,MainActivity.class));
+                finish();
             }
         }
 
